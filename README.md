@@ -1,11 +1,11 @@
 # Password Generator
 
-This program is a small python password generator, which generate random password for you.
-GUI is created in Tkinter.
+This program is a small python password generator, which generates random passwords for you. 
+GUI was created in Tkinter.
 
  - Generate random password
  - Copy it to clipboard
- - And you have secure password
+ - And you have a secure password
 
 ### Status
 
