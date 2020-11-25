@@ -8,15 +8,17 @@ app = Tk()
 app.geometry("205x100")
 app.title("Password Generator")
 
-# Items used to generate password
+# Elements
 uppercase_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 lowercase_letters = uppercase_letters.lower()
 digits = "0123456789"
-# From which items you want to generate password
+
+# From which elements you want to generate password
 upper, lower, nums = True, True, True
 
-everything = ""
-# Add items what you want to everything variable
+everything = "" # All elements used to generate a password
+
+# Add elements what you want to everything variable
 if upper:
     everything += uppercase_letters
 if lower:
@@ -30,7 +32,7 @@ amount = 1 # Amount of generated passwords
 Generated = Label(app, text="Generated password:") 
 Generated.grid(row=0, column=1)
 
-Space = Label(app, text="") # Program must look good
+Space = Label(app, text="")
 Space.grid(row=1, column=0)
 
 PasswordText = Entry(app, width=25) # Text box
@@ -56,4 +58,4 @@ def copytoclipboard():
 Copy = Button(app, text="Copy", command=copytoclipboard) # Copying button
 Copy.grid(row=1, column=3)
 
-app.mainloop() # Password Generator is made by Brais
+app.mainloop() # Password Generator was made by Damian "Brais" Uździło
