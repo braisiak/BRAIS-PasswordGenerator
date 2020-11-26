@@ -3,13 +3,14 @@
 This program is a small python password generator, which generates random passwords for you. 
 GUI was created in Tkinter.
 
+ - Choose options
  - Generate random password
  - Copy it to clipboard
  - And you have a secure password
 
 ### Status
 
-Version: 1.4
+Version: 1.5
 
 ### Installation
 
