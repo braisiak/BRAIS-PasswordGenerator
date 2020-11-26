@@ -6,7 +6,7 @@ from contextlib import suppress
 
 # Define window
 app = Tk()
-app.geometry("300x145")
+app.geometry("348x145")
 app.title("Password Generator")
 # Items used to generate password
 uppercase_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -50,7 +50,7 @@ def check_4():
     elif syms.get() == False:
         everything = everything.replace(",.<>?/':;{}[]|\=+-_)(*&^%$#@!~`", "")
     
-
+# Checkbuttons Labels
 CheckboxLabel_1 = Label(app, text="Uppercase")
 CheckboxLabel_1.grid(row=2, column=5)
 
@@ -63,6 +63,7 @@ CheckboxLabel_3.grid(row=4, column=5)
 CheckboxLabel_4 = Label(app, text="Symbols")
 CheckboxLabel_4.grid(row=5, column=5)
 
+# Checkbuttons
 Checkbox_1 = Checkbutton(app, text="", variable=upper, onvalue = True, offvalue= False, command=check_1)
 Checkbox_1.grid(row=2, column=6)
 
@@ -75,51 +76,55 @@ Checkbox_3.grid(row=4, column=6)
 Checkbox_4 = Checkbutton(app, text="", variable=syms, onvalue = True, offvalue= False, command=check_4)
 Checkbox_4.grid(row=5, column=6)
 
+# Length Label
 LengthText = Label(app, text="Length: ")
 LengthText.grid(row=0, column=5)
 
 Space = Label(app, text="")
 Space.grid(row=0, column=4)
 
+# Length Entry
 length = Entry(app, width=4) # Length of your password
 length.insert(0, "20") # Default length (max. 62)
 length.grid(row=0, column=6)
 
+# Amount Label
 AmountText = Label(app, text="Amount: ")
 AmountText.grid(row=1, column=5)
 
+# Amount Entry
 amount = Entry(app, width=4) # Amount of generated passwords
 amount.insert(0, "1") # Default amount
 amount.grid(row=1, column=6)
 
-Generated = Label(app, text="Generated password:") 
+Generated = Label(app, text="Generated passwords:") 
 Generated.grid(row=0, column=1)
 
 Space_1 = Label(app, text="")
 Space_1.grid(row=1, column=0)
 
-PasswordText = Entry(app, width=25) # Text box
-PasswordText.grid(row=1, column=1)
+PasswordText = Text(app, width=25, height=3) # Text box
+PasswordText.grid(row=1, column=1, rowspan=3)
 
 # Generating password function
 def generate_password():
     with suppress(ValueError): # Ignore ValueError
-        PasswordText.delete(0, END) # Clear text box before writing a new password
+        PasswordText.delete("1.0", END) # Clear text box before writing a new password
         for x in range(int(amount.get())):
             password = "".join(random.sample(everything, int(length.get())))
-            PasswordText.insert(0, password) # Past password into text box
+            PasswordText.insert("1.0", password + "\n") # Past password into text box
         Completed = Label(app, text="Password generated.", fg="green") # Show info
-        Completed.grid(row=3, column=1)
+        Completed.grid(row=5, column=1)
 
 Submit = Button(app, text="Generate", command=generate_password) # Generating button
-Submit.grid(row=2, column=1)
+Submit.grid(row=4, column=1)
 
 # Copying password to clipboard
 def copytoclipboard():
-    clipboard.copy(PasswordText.get())
+    clipboard.copy(PasswordText.get("1.0", END))
     messagebox.showinfo(title="Info", message="Password copied to clipboard.")
     
 Copy = Button(app, text="Copy", command=copytoclipboard) # Copying button
-Copy.grid(row=1, column=3)
+Copy.grid(row=2, column=3)
 
 app.mainloop() # Password Generator was made by Damian "Brais" Uździło
