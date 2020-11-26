@@ -6,41 +6,50 @@ from contextlib import suppress
 
 # Define window
 app = Tk()
-app.geometry("305x125")
+app.geometry("300x145")
 app.title("Password Generator")
 # Items used to generate password
 uppercase_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 lowercase_letters = "abcdefghijklmnopqrstuvwxyz"
 digits = "0123456789"
+symbols = ",.<>?/':;{}[]|\=+-_)(*&^%$#@!~`"
 # From which items you want to generate password
 upper = BooleanVar()
 lower = BooleanVar()
 nums = BooleanVar()
+syms = BooleanVar()
 
 everything = ""
 
 def check_1():
-    global upper, lower, nums
+    global upper
     global everything
-    # Add items what you want to everything variable
     if upper.get() == True:
         everything += uppercase_letters
-    if upper.get() == False:
+    elif upper.get() == False:
         everything = everything.replace("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "")
 def check_2():
-    global upper, lower, nums
+    global lower
     global everything
     if lower.get() == True:
         everything += lowercase_letters
-    if lower.get() == False:
+    elif lower.get() == False:
         everything = everything.replace("abcdefghijklmnopqrstuvwxyz", "")
 def check_3():
-    global upper, lower, nums
+    global nums
     global everything
     if nums.get() == True:
         everything += digits
-    if nums.get() == False:
+    elif nums.get() == False:
         everything = everything.replace("0123456789", "")
+def check_4():
+    global syms
+    global everything
+    if syms.get() == True:
+        everything += symbols
+    elif syms.get() == False:
+        everything = everything.replace(",.<>?/':;{}[]|\=+-_)(*&^%$#@!~`", "")
+    
 
 CheckboxLabel_1 = Label(app, text="Uppercase")
 CheckboxLabel_1.grid(row=2, column=5)
@@ -51,6 +60,9 @@ CheckboxLabel_2.grid(row=3, column=5)
 CheckboxLabel_3 = Label(app, text="Numbers")
 CheckboxLabel_3.grid(row=4, column=5)
 
+CheckboxLabel_4 = Label(app, text="Symbols")
+CheckboxLabel_4.grid(row=5, column=5)
+
 Checkbox_1 = Checkbutton(app, text="", variable=upper, onvalue = True, offvalue= False, command=check_1)
 Checkbox_1.grid(row=2, column=6)
 
@@ -59,6 +71,9 @@ Checkbox_2.grid(row=3, column=6)
 
 Checkbox_3 = Checkbutton(app, text="", variable=nums, onvalue = True, offvalue= False, command=check_3)
 Checkbox_3.grid(row=4, column=6)
+
+Checkbox_4 = Checkbutton(app, text="", variable=syms, onvalue = True, offvalue= False, command=check_4)
+Checkbox_4.grid(row=5, column=6)
 
 LengthText = Label(app, text="Length: ")
 LengthText.grid(row=0, column=5)
