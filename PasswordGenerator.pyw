@@ -9,6 +9,7 @@ app = Tk()
 app.geometry("348x145")
 app.title("Password Generator")
 app.iconbitmap('data/icon.ico')
+app.resizable(0, 0)
 # Items used to generate password
 uppercase_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 lowercase_letters = "abcdefghijklmnopqrstuvwxyz"
@@ -86,7 +87,7 @@ Space.grid(row=0, column=4)
 
 # Length Entry
 length = Entry(app, width=4) # Length of your password
-length.insert(0, "20") # Default length (max. 62)
+length.insert(0, "20") # Default length (max. 93)
 length.grid(row=0, column=6)
 
 # Amount Label
@@ -114,6 +115,8 @@ def generate_password():
         for x in range(int(amount.get())):
             password = "".join(random.sample(everything, int(length.get())))
             PasswordText.insert("1.0", password + "\n") # Past password into text box
+            if PasswordText.get('end-1c', 'end') == '\n':
+                PasswordText.delete('end-1c', 'end')
         Completed = Label(app, text="Password generated.", fg="green") # Show info
         Completed.grid(row=5, column=1)
 
@@ -122,7 +125,7 @@ Submit.grid(row=4, column=1)
 
 # Copying password to clipboard
 def copytoclipboard():
-    clipboard.copy(PasswordText.get("1.0", END))
+    clipboard.copy(PasswordText.get("1.0", 'end-1c'))
     messagebox.showinfo(title="Info", message="Password copied to clipboard.")
     
 Copy = Button(app, text="Copy", command=copytoclipboard) # Copying button
