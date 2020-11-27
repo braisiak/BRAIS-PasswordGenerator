@@ -8,6 +8,7 @@ from contextlib import suppress
 app = Tk()
 app.geometry("348x145")
 app.title("Password Generator")
+app.iconbitmap('data/icon.ico')
 # Items used to generate password
 uppercase_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 lowercase_letters = "abcdefghijklmnopqrstuvwxyz"
